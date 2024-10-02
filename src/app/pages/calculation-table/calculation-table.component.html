@@ -1,0 +1,42 @@
+<div class="stored-results mt-8" *ngIf="storedResults.length > 0">
+  <h2 class="text-2xl font-bold mb-4">نتائج الموسم</h2>
+  <table class="w-full border-collapse border border-gray-300">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-2">التاريخ</th>
+        <th class="border border-gray-300 p-2">إجمالي القراريط</th>
+        <th class="border border-gray-300 p-2">سعر القيراط</th>
+        <th class="border border-gray-300 p-2">التكلفة </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of storedResults" class="hover:bg-gray-50">
+        <td class="border border-gray-300 p-2">{{ result.date | date:'yyyy-MM-dd ــــــــ hh:ss aa' }}</td>
+        <td class="border border-gray-300 p-2">{{ result.totalCarats | number:'1.2-2' }}</td>
+        <td class="border border-gray-300 p-2">{{ result.caratPrice }}</td>
+        <td class="border border-gray-300 p-2">{{ result.totalCost  }} جنيه مصري</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="bg-gray-100 font-bold">
+        <td class="border border-gray-300 p-2">المجموع</td>
+        <td class="border border-gray-300 p-2 flex gap-x-4">
+          <span>
+            {{ getTotalCarats }} قيراط
+          </span>
+          <span>
+            ({{ getTotalCarats / 24 | number: '1.2-2' }} فدان)
+          </span>
+        </td>
+        <td class="text-center">-</td>
+        <td class="border border-gray-300 p-2">
+          {{ getTotalCost }} جنيه مصري
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <button (click)="clearStoredResults()" class="mt-4 !rounded-xl bg-red-500 text-white px-4 py-2 font-bold  hover:bg-red-600 transition duration-300">
+    مسح  جميع النتائج 
+  </button>
+</div>

@@ -1,0 +1,30 @@
+<div class="bg-white rounded-3xl p-5 mx-auto my-6 ">
+    <form class="flex justify-center flex-col mx-2" [formGroup]="calculatorForm" (ngSubmit)="calculateTotal()">
+      <div class="flex flex-col mb-5 flex-1">
+        <label class="mb-2 font-semibold text-er-gray-light" for="carat">عدد القراريط</label>
+        <p-inputNumber id="carat" styleClass="co-p-inputnumber full-width" formControlName="carats" inputId="integeronly" placeholder="اكتب عدد القراريط" /> 
+      </div>
+      <div class="flex flex-col mb-5">
+        <label class="mb-2 font-semibold text-er-gray-light" for="acre">عدد الفدادين</label>
+        <p-inputNumber id="acre" styleClass="co-p-inputnumber full-width" formControlName="acres" inputId="integeronly" placeholder="اكتب عدد الفدادين" /> 
+      </div>
+      <div class="flex flex-col mb-5">
+        <label class="mb-2 font-semibold text-er-gray-light" for="pricePerCarat"> سعر القيراط الواحد</label>
+        <p-inputNumber id="pricePerCarat" styleClass="co-p-inputnumber full-width" formControlName="pricePerCarat" inputId="integeronly" placeholder="اكتب سعر القيراط الواحد" />
+      </div>
+      <div class="text-center">
+        <button class="font-bold !rounded-lg text-white bg-[#4CAF50] px-20 py-3" type="submit">احسب</button>
+      </div>
+    </form>
+    <div class="results" *ngIf="totalCarats > 0">
+      <p>اجمالي عدد القراريط: <span class="font-bold"> {{ totalCarats  }} </span>  قيراط</p>
+      <p>اجمالي التكلفة : <span class="font-bold"> {{ totalCost  }} </span>  جنيه مصري </p>
+    </div>
+
+    <div>
+      <app-calculation-table 
+      [storedResults]="storedResults"
+      (outputEvent)="getEvent($event)"
+       ></app-calculation-table>
+    </div>
+  </div>
