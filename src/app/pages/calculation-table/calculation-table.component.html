@@ -7,20 +7,26 @@
         <th class="border border-gray-300 p-2">إجمالي القراريط</th>
         <th class="border border-gray-300 p-2">سعر القيراط</th>
         <th class="border border-gray-300 p-2">التكلفة </th>
+        <th class="border border-gray-300 p-2">الإجراءات</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let result of storedResults" class="hover:bg-gray-50">
-        <td class="border border-gray-300 p-2">{{ result.date | date:'yyyy-MM-dd ــــــــ hh:ss aa' }}</td>
+      <tr *ngFor="let result of storedResults; let i = index" class="hover:bg-gray-50">
+        <td class="border border-gray-300 p-2">{{ result.date | date:'yyyy-MM-dd ↔ hh:ss aa' }}</td>
         <td class="border border-gray-300 p-2">{{ result.totalCarats | number:'1.2-2' }}</td>
         <td class="border border-gray-300 p-2">{{ result.caratPrice }}</td>
         <td class="border border-gray-300 p-2">{{ result.totalCost  }} جنيه مصري</td>
+        <td class="border border-gray-300 p-2">
+          <button (click)="deleteRow(i)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition duration-300">
+            حذف
+          </button>
+        </td>
       </tr>
     </tbody>
     <tfoot>
       <tr class="bg-gray-100 font-bold">
         <td class="border border-gray-300 p-2">المجموع</td>
-        <td class="border border-gray-300 p-2 flex gap-x-4">
+        <td class="border border-gray-300 p-2 flex gap-x-4 bg-slate-300">
           <span>
             {{ getTotalCarats }} قيراط
           </span>
@@ -28,10 +34,11 @@
             ({{ getTotalCarats / 24 | number: '1.2-2' }} فدان)
           </span>
         </td>
-        <td class="text-center">-</td>
-        <td class="border border-gray-300 p-2">
+        <td class="text-center"></td>
+        <td class="border border-gray-300 p-2 bg-slate-300">
           {{ getTotalCost }} جنيه مصري
         </td>
+        <td class="text-center"></td>
       </tr>
     </tfoot>
   </table>
