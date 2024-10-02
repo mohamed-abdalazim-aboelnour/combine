@@ -13,7 +13,8 @@ import { Component, EventEmitter, Input, input, Output, output } from '@angular/
 export class CalculationTableComponent {
 
   @Input() storedResults: any[] = []
-  @Output() outPutEvent = new EventEmitter()
+  @Output() outputEvent = new EventEmitter()
+  @Output() deleteRowEvent = new EventEmitter<number>()
 
   get getTotalCarats(): number {
     return this.storedResults.reduce((acc, result) => acc + result.totalCarats, 0);
@@ -25,11 +26,15 @@ export class CalculationTableComponent {
 
   clearStoredResults() {
     const userConfirmed = confirm("انت متأكد انك عاوز تمسح كل حاجه 🙄");
-if (userConfirmed) {
-  this.outPutEvent.emit('')
-  localStorage.clear()
-  location.reload()
-} 
+    if (userConfirmed) {
+      this.outputEvent.emit('')
+      localStorage.clear()
+      location.reload()
+    } 
+  }
+
+  deleteRow(index: number) {
+    this.deleteRowEvent.emit(index);
   }
 
 }
