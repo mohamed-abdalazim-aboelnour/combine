@@ -22,10 +22,11 @@
           </div>
         </div>
         <div class="md:hidden">
-          <button (click)="toggleMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+          <button (click)="toggleMenu()" class="inline-flex gap-x-2 text-nowrap font-bold items-center justify-center p-2 rounded-md text-white hover:text-white ">
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path [attr.d]="isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
             </svg>
+            دوس هنا بسرعه
           </button>
         </div>
       </div>
@@ -36,9 +37,11 @@
         <!-- <a routerLink="/" class="text-gray-600 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold">الحاسبة اليومية</a> -->
         <a  class="text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer" onclick="window.location.href='tel:+1234567890'"> 
           <span class="text-er-gray-dark font-bold">
-            للتواصل : ابراهيم ابوزياده
+            <pre>
+               دا الرقم  للتواصل : ابراهيم ابوزياده 
+            </pre>
           </span>
-          <span class="font-bold text-xl">
+          <span class="font-bold text-xl" title="دوس عليا وانا هتصل">
             ( 01001043029 )
           </span>
           
