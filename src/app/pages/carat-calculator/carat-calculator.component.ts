@@ -59,29 +59,32 @@ export class CaratCalculatorComponent {
     // Reset the form
     this.calculatorForm.reset();
 
-}
-
-storeResult(result: any) {
-  // Add the new result to the storedResults array
-  this.storedResults.push(result);
-  
-  // Store the updated results in local storage
-  localStorage.setItem('caratCalculatorResults', JSON.stringify(this.storedResults));
-}
-
-loadStoredResults() {
-  // Get the stored results from local storage
-  const stored = localStorage.getItem('caratCalculatorResults');
-  
-  if (stored) {
-    // Parse and assign the stored results if available
-    this.storedResults = JSON.parse(stored);
   }
-}
+
+  storeResult(result: any) {
+    this.storedResults.push(result);
+    this.updateLocalStorage();
+  }
+
+  loadStoredResults() {
+    const stored = localStorage.getItem('caratCalculatorResults');
+    if (stored) {
+      this.storedResults = JSON.parse(stored);
+    }
+  }
 
 
-getEvent(event: any) {
-  this.storedResults = [];
-  localStorage.removeItem('caratCalculatorResults');
-}
+  getEvent(event: any) {
+    this.storedResults = [];
+    this.updateLocalStorage();
+  }
+
+  deleteRow(index: number) {
+    this.storedResults.splice(index, 1);
+    this.updateLocalStorage();
+  }
+
+  private updateLocalStorage() {
+    localStorage.setItem('caratCalculatorResults', JSON.stringify(this.storedResults));
+  }
 }
