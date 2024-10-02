@@ -32,7 +32,14 @@
   
     <div [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="md:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a routerLink="/" class="text-gray-600 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold">الحاسبة اليومية</a>
+      <!--<a routerLink="/" class="text-gray-600 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold">الحاسبة اليومية</a> -->
+        <a  class="text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer" onclick="window.location.href='tel:+1234567890'"> 
+              <span class="text-er-gray-dark font-bold">
+                للتواصل : ابراهيم ابوزياده
+              </span>
+              <span class="font-bold text-xl">
+                ( 01001043029 )
+              </span>
       </div>
     </div>
   </nav>
