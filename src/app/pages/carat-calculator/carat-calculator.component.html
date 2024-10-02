@@ -25,6 +25,7 @@
       <app-calculation-table 
       [storedResults]="storedResults"
       (outputEvent)="getEvent($event)"
+      (deleteRowEvent)="deleteRow($event)"
        ></app-calculation-table>
     </div>
   </div>
