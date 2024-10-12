@@ -32,9 +32,9 @@ export class CaratCalculatorComponent {
 
   constructor(private fb: FormBuilder) {
     this.calculatorForm = this.fb.group({
-      carats: [''],
-      acres: [''],
-      pricePerCarat: ['60']
+      carats: [null],
+      acres: [null],
+      pricePerCarat: [80]
     });
   }
 
@@ -57,7 +57,8 @@ export class CaratCalculatorComponent {
     this.storeResult(result);
 
     // Reset the form
-    this.calculatorForm.reset();
+    this.calculatorForm.get('carats')?.reset()
+    this.calculatorForm.get('acres')?.reset()
 
   }
 
