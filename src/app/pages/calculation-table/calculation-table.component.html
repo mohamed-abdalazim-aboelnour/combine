@@ -1,5 +1,15 @@
-<div class="stored-results mt-8" *ngIf="storedResults.length > 0">
-  <h2 class="text-2xl font-bold mb-4">نتائج الموسم</h2>
+<div class="stored-results my-8" *ngIf="storedResults.length > 0">
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <h2 class="text-2xl font-bold">نتائج الموسم</h2>
+    </div>
+    <div>
+      <button (click)="clearStoredResults()" class="mt-4 !rounded-xl bg-red-500 text-white px-4 py-2 font-bold  hover:bg-red-600 transition duration-300">
+        مسح  جميع النتائج 
+      </button>
+    </div>
+  </div>
+  
   <table class="w-full border-collapse border border-gray-300">
     <thead>
       <tr class="bg-gray-100">
@@ -15,7 +25,7 @@
         <td class="border border-gray-300 p-2">{{ result.date | date:'yyyy-MM-dd ↔ hh:ss aa' }}</td>
         <td class="border border-gray-300 p-2">{{ result.totalCarats | number:'1.2-2' }}</td>
         <td class="border border-gray-300 p-2">{{ result.caratPrice }}</td>
-        <td class="border border-gray-300 p-2">{{ result.totalCost  }} جنيه مصري</td>
+        <td class="border border-gray-300 p-2">{{ result.totalCost | number:'1.2-2'  }} جنيه مصري</td>
         <td class="border border-gray-300 p-2">
           <button (click)="deleteRow(i)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition duration-300">
             حذف
@@ -25,8 +35,8 @@
     </tbody>
     <tfoot>
       <tr class="bg-gray-100 font-bold">
-        <td class="border border-gray-300 p-2">المجموع</td>
-        <td class="border border-gray-300 p-2 flex gap-x-4 bg-slate-300">
+        <td class="border border-slate-300 p-2">المجموع</td>
+        <td class="border border-orange-300 p-2 flex gap-x-4 bg-orange-300">
           <span>
             {{ getTotalCarats }} قيراط
           </span>
@@ -35,15 +45,72 @@
           </span>
         </td>
         <td class="text-center"></td>
-        <td class="border border-gray-300 p-2 bg-slate-300">
-          {{ getTotalCost }} جنيه مصري
+        <td class="border border-orange-300 p-2 bg-orange-300">
+          {{ getTotalCost | number:'1.2-2' }} جنيه مصري
         </td>
         <td class="text-center"></td>
       </tr>
     </tfoot>
   </table>
 
-  <button (click)="clearStoredResults()" class="mt-4 !rounded-xl bg-red-500 text-white px-4 py-2 font-bold  hover:bg-red-600 transition duration-300">
-    مسح  جميع النتائج 
-  </button>
+  <div class="border-b-2 py-3"></div>
+
+  <div class="mt-4">
+    <h3 class="text-xl font-bold mb-4">ملخص الأسعار</h3>
+    <table class="w-full border-collapse border border-gray-300">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border border-gray-300 p-2">نوع القيراط</th>
+          <th class="border border-gray-300 p-2">إجمالي القراريط</th>
+          <th class="border border-gray-300 p-2">إجمالي التكلفة</th>
+          <th class="border border-gray-300 p-2"></th>
+          <th class="border border-gray-300 p-2">النسبه الاجماليه</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2 font-bold">80</td>
+          <td class=" p-2 flex gap-x-4 font-semibold">
+            <span>
+              {{ getTotalCaratsForPrice(80) }} قيراط
+            </span>
+            <span>
+              ({{ getTotalCaratsForPrice(80) / 24 | number: '1.2-2' }} فدان)
+            </span>
+          </td>
+          <td class="border border-gray-300 p-2 font-semibold">{{ getTotalCostForPrice(80) | number:'1.2-2' }} جنيه مصري</td>
+          <td class="border border-gray-300 ">
+            <input type="number" class="border border-blue-200 p-2 shadow-sm rounded-sm w-full" (input)="calculatePercentage80($any($event.target).value)" placeholder="اكتب النسبه هنا % ">
+          </td>
+          <td class="border border-gray-300 p-2 font-semibold">
+            <span>
+              {{ percentage80 | number:'1.2-2' }} جنيه مصري
+            </span>
+          </td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2 font-bold">90</td>
+          <td class="border border-gray-300 p-2 flex gap-x-4 font-semibold">
+            <span>
+              {{ getTotalCaratsForPrice(90) }} قيراط
+            </span>
+            <span>
+              ({{ getTotalCaratsForPrice(90) / 24 | number: '1.2-2' }} فدان)
+            </span>
+          </td>
+          <td class="border border-gray-300 p-2 font-semibold">{{ getTotalCostForPrice(90) | number:'1.2-2' }} جنيه مصري</td>
+          <td class="border border-gray-300 ">
+            <input type="number" class="border border-blue-200 p-2 shadow-sm rounded-sm w-full" (input)="calculatePercentage90($any($event.target).value)" placeholder="اكتب النسبه هنا %">
+          </td>
+          <td class="border border-gray-300 p-2 font-semibold">
+            <span>
+              {{ percentage90 | number:'1.2-2' }} جنيه مصري
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
 </div>
