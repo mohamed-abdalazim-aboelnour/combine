@@ -16,12 +16,27 @@ export class CalculationTableComponent {
   @Output() outputEvent = new EventEmitter()
   @Output() deleteRowEvent = new EventEmitter<number>()
 
+  percentage80 = 0;
+  percentage90 = 0;
+
   get getTotalCarats(): number {
     return this.storedResults.reduce((acc, result) => acc + result.totalCarats, 0);
   }
 
   get getTotalCost(): number {
     return this.storedResults.reduce((acc, result) => acc + result.totalCost, 0);
+  }
+
+  getTotalCaratsForPrice(price: number): number {
+    return this.storedResults
+      .filter(result => result.caratPrice === price)
+      .reduce((acc, result) => acc + result.totalCarats, 0);
+  }
+
+  getTotalCostForPrice(price: number): number {
+    return this.storedResults
+      .filter(result => result.caratPrice === price)
+      .reduce((acc, result) => acc + result.totalCost, 0);
   }
 
   clearStoredResults() {
@@ -31,6 +46,16 @@ export class CalculationTableComponent {
       localStorage.clear()
       location.reload()
     } 
+  }
+
+  calculatePercentage80(value: number) {
+    const totalCost = this.getTotalCostForPrice(80);
+    this.percentage80 = totalCost * ( value / 100);
+    
+  }
+  calculatePercentage90(value: number) {
+    const totalCost = this.getTotalCostForPrice(90);
+    this.percentage90 = totalCost * ( value / 100);
   }
 
   deleteRow(index: number) {
